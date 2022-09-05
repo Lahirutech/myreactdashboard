@@ -10,51 +10,42 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
+import { useNavigate } from "react-router-dom";
+import { mainNavbarItems } from './consts/navbarItems';
+import { navbarStyles } from './styles';
+
+
+
 export default function Navbar() {
-    const drawerWidth = 200
+    const navigate = useNavigate();
     return (
         <Drawer
-            sx={{
-                width: drawerWidth,
-                flexShrink: 0,
-                '& .MuiDrawer-paper': {
-                    width: drawerWidth,
-                    boxSizing: 'border-box',
-                    backgroundColor: "#101F33",
-                    color: "#FFFFFF"
-
-                },
-            }}
+            sx={navbarStyles.drawer}
             variant="permanent"
             anchor="left"
         >
             <Toolbar />
             <Divider />
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon sx={{ color: "#FFFFFF" }}>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
+                {mainNavbarItems.map((item, index) => (
+                    <ListItem
+                        button
+                        key={item.id}
+                        onClick={() => navigate(item.route)}
+                    >
+                        <ListItemIcon
+                            sx={navbarStyles.icons}
+                        >
+                            {item.icon}
+                        </ListItemIcon>
+                        <ListItemText
+                            sx={navbarStyles.text}
+                            primary={item.label}
+                        />
                     </ListItem>
                 ))}
             </List>
-            <Divider />
-            <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon sx={{ color: "#FFFFFF" }}>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
+
         </Drawer>
     )
 }
