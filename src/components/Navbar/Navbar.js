@@ -45,7 +45,6 @@ export default function Navbar() {
                     </ListItem>
                 ))}
             </List>
-
         </Drawer>
     )
 }
