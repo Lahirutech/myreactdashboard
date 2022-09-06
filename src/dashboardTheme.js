@@ -24,5 +24,10 @@ export const dashboardTheme = createTheme({
             },
         },
     },
-  
+    palette: {
+        white: {
+            main: '#fff',
+        },
+    },
+
 });
