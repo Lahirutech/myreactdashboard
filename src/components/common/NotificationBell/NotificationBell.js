@@ -37,16 +37,13 @@ export default function NotificationBell({ iconColor }) {
         <IconButton color={iconColor} onClick={notifications.length ? handleOpen : null}
           anchorEl={anchorEl}
         >
-
           <NotificationsIcon />
-
         </IconButton>
       </Tooltip>
       <BasicMenu open={open}
         anchorEl={anchorEl}
         handleClose={handleClose}
         menuItems={notifications}>
-
       </BasicMenu>
 
     </div>
