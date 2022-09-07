@@ -13,9 +13,6 @@ import MailIcon from '@mui/icons-material/Mail';
 import { useNavigate } from "react-router-dom";
 import { mainNavbarItems } from './consts/navbarItems';
 import { navbarStyles } from './styles';
-
-
-
 export default function Navbar() {
     const navigate = useNavigate();
     return (
