@@ -7,11 +7,12 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import GridWrapper from '../../common/GridWrapper/GridWrapper';
 import SearchBar from '../../common/SearchBar/SearchBar';
 import BasicCard from '../../common/BasicCard/BasicCard';
+import NewUserModal from '../../Modals/NewUserModal/NewUserModal';
 
 export default function Authentication() {
 
-  const [modelOpen, setModelOpen] = useState(false)
-
+  const [open, setOpen] = useState(false);
+  const [users, setUsers] = useState([]);
   const style = {
     position: 'absolute',
     top: '50%',
@@ -50,16 +51,8 @@ export default function Authentication() {
     };
 
     const addUser = () => {
-      console.log('click')
-      setModelOpen(true)
-    };
-
-    const handleClose = () => {
-      setModelOpen(false)
-    }
-
-
-
+      setOpen(true);
+  };
     return (
       <Box sx={cardStyles.cardHeader}>
         <SearchBar
@@ -78,35 +71,24 @@ export default function Authentication() {
           </IconButton>
         </Box>
         {/* modal */}
-        <Modal
-          open={modelOpen}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
-          </Box>
-        </Modal>
+
       </Box>
     )
 
   }
 
-  const getContent = () => (<Typography
-    align="center"
-    sx={{ margin: '40px 16px', color: 'rgba(0, 0, 0, 0.6)', fontSize: '1.3rem' }}
-  >
-    No users for this project yet
-  </Typography>
+  const getContent = () => (
+    <Typography
+      align="center"
+      sx={{ margin: '40px 16px', color: 'rgba(0, 0, 0, 0.6)', fontSize: '1.3rem' }}>
+      No users for this project yet
+    </Typography>
   )
 
-
+  const addNewUser = (data) => {
+    users.push({ ...data });
+    setOpen(false);
+};
 
 
   return (
@@ -115,6 +97,9 @@ export default function Authentication() {
       <BasicCard
         header={getHeader()}
         content={getContent()} />
+      
+      <NewUserModal open={open} onClose={() => setOpen(false)} addNewUser={addNewUser} />
+
     </GridWrapper>
   )
 }
