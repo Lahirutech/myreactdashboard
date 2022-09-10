@@ -12,8 +12,20 @@ const defaultInputValues = {
     phoneNumber: ''
 };
 
-export default function NewUserModal({open, onClose, addNewUser}) {
+export default function NewUserModal({ open, onClose, addNewUser }) {
     const [values, setValues] = useState(defaultInputValues);
+
+    const modalStyles = {
+        inputFields: {
+            display: 'flex',
+            flexDirection: 'column',
+            marginTop: '20px',
+            marginBottom: '15px',
+            '.MuiFormControl-root': {
+                marginBottom: '20px',
+            },
+        },
+    };
 
     // validation schema
     const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -47,14 +59,14 @@ export default function NewUserModal({open, onClose, addNewUser}) {
 
 
     useEffect(() => {
-      if(open) setValues(defaultInputValues)
-    
-        
-    }, [open])
-    
+        if (open) setValues(defaultInputValues)
 
-    const getContent = () => {
-        <Box>
+
+    }, [open])
+
+
+    const getContent = () => (
+        <Box sx={modalStyles.inputFields}>
             <TextField placeholder='User Id'
                 name='userId'
                 label='User Id'
@@ -65,7 +77,7 @@ export default function NewUserModal({open, onClose, addNewUser}) {
                 value={values.userId}
                 onChange={(event) => handleChange({ ...values, userId: event.target.value })}
             />
-             <TextField
+            <TextField
                 placeholder="Email"
                 name="email"
                 label="Email"
@@ -76,7 +88,7 @@ export default function NewUserModal({open, onClose, addNewUser}) {
                 value={values.email}
                 onChange={(event) => handleChange({ ...values, email: event.target.value })}
             />
-             <TextField
+            <TextField
                 placeholder="Phone number"
                 name="phoneNumber"
                 label="Phone number"
@@ -89,10 +101,10 @@ export default function NewUserModal({open, onClose, addNewUser}) {
             />
         </Box>
 
-    }
+    )
 
     return (
-        <BasicModal 
+        <BasicModal
             open={open}
             onClose={onClose}
             title="New User"

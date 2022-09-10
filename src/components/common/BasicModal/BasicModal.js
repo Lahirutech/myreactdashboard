@@ -1,16 +1,14 @@
-import { Box, Modal, Typography } from '@mui/material'
+import { Box, Modal, modalUnstyledClasses, Typography } from '@mui/material'
 import React from 'react'
 import CommonButton from '../commonButton/CommonButton'
+import { modalStyles } from './styles';
+
 
 export default function BasicModal({ open, onClose, title, subTitle, content, onSubmit }) {
     return (
-        <Modal
-            open={open}
-            onClose={onClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-        >
-            <Box >
+        <Modal open={open}
+            onClose={onClose}>
+            <Box sx={modalStyles.wrapper}>
                 <Typography
                     variant="h6"
                     component="h2">
@@ -20,8 +18,9 @@ export default function BasicModal({ open, onClose, title, subTitle, content, on
                     {subTitle}
                 </Typography>
                 {content}
-                <Box>
-                    <CommonButton onClick={onSubmit}>
+                <Box sx={modalStyles.buttons}>
+                    <CommonButton variant="contained"
+                        onClick={onSubmit}>
                         Submit
                     </CommonButton>
                     <CommonButton onClick={onClose}>
